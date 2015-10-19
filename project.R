@@ -86,26 +86,3 @@ prp(treeModel) # fast plot
 
 # corrPlot <- cor(training_data[, -length(names(training_data))])
 # corrplot(corrPlot, method="color")
-
-
-
-##############################
-
-pml_write_files = function(x){
-  n = length(x)
-  for(i in 1:n){
-    filename = paste0("problem_id_",i,".txt")
-    write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
-  }
-}
-
-featureset <- colnames(training_data[colSums(is.na(training_data)) == 0])[-(1:7)]
-featureset #now we have the model data built from our feature set.
-
-
-testing_data <- testing_data[featureset[featureset!='classe']]
-answers <- predict(model, newdata=testing_data)
-answers
-
-pml_write_files(answers)
-
